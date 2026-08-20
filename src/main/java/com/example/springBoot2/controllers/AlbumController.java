@@ -8,35 +8,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/album")
+@RequestMapping("/albums")
 public class AlbumController {
     private final AlbumRepository albumRepository;
 
     public AlbumController(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
-    @GetMapping("/album")
+    @GetMapping
     public List<Album> getAlbum() {
         return albumRepository.findAll();
     }
 
-    @GetMapping("/album/{id}")
+    @GetMapping("/{id}")
     public Album getAlbum(@PathVariable int id) {
         return albumRepository.findById(id).orElse(null);
     }
 
-    @PostMapping("/album")
+    @PostMapping
     public Album createAlbum(@RequestBody Album album) {
         return albumRepository.save(album);
     }
 
-    @PutMapping("/album/{id}")
+    @PutMapping("/{id}")
     public Album updateMAlbum(@PathVariable int id, @RequestBody Album album) {
         album.setId(id);
         return albumRepository.save(album);
     }
 
-    @DeleteMapping("/album/{id}")
+    @DeleteMapping("/{id}")
     public void deleteAlbum(@PathVariable int id) {
         albumRepository.deleteById(id);
     }

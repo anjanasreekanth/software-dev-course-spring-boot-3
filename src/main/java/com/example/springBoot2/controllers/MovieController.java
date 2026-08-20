@@ -7,35 +7,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
     private final MovieRepository movieRepository;
 
     public MovieController(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
-    @GetMapping("/movie")
+    @GetMapping
     public List<Movie> getMovie() {
         return movieRepository.findAll();
     }
 
-    @GetMapping("/movie/{id}")
+    @GetMapping("/{id}")
     public Movie getMovie(@PathVariable int id) {
         return movieRepository.findById(id).orElse(null);
     }
 
-    @PostMapping("/movie")
+    @PostMapping
     public Movie createMovie(@RequestBody Movie movie) {
         return movieRepository.save(movie);
     }
 
-    @PutMapping("/movie/{id}")
+    @PutMapping("/{id}")
     public Movie updateMovie(@PathVariable int id, @RequestBody Movie movie) {
         movie.setId(id);
         return movieRepository.save(movie);
     }
 
-    @DeleteMapping("/movie/{id}")
+    @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable int id) {
         movieRepository.deleteById(id);
     }
